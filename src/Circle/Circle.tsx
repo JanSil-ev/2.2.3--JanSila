@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import styles from "./Circle.module.scss";
 
 interface Props {
@@ -6,7 +7,11 @@ interface Props {
   onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export function Circle({ color, active, onClick }: Props) {
+// export function Circle({ color, active, onClick }: Props) {
+
+export const Circle = forwardRef<HTMLDivElement, Props>(
+  ({ color, active, onClick}, ref) => {
+
   const colorClass = styles[`circle-${color}`];
   const activeClass = active ? styles[`circle-${color}--active`] : "";
 
@@ -19,6 +24,7 @@ export function Circle({ color, active, onClick }: Props) {
 
   return (
     <div
+    ref={ref}
       tabIndex={0}
       className={`${styles.circle} ${colorClass} ${activeClass}`}
       onClick={onClick}
@@ -28,3 +34,4 @@ export function Circle({ color, active, onClick }: Props) {
     />
   );
 }
+)

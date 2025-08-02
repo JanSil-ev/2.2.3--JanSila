@@ -1,18 +1,30 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import { Circle } from "./Circle/Circle";
 
 function App() {
   const [activeCircle, setActiveCircle] = useState<string>("red");
 
+const redCircleRef = useRef<HTMLDivElement>(null)
+
+useEffect(() => {
+  if(redCircleRef.current) {
+    redCircleRef.current.focus();
+  }
+}, []);
+
+
   const handleCircleClick = (color: string) => {
     setActiveCircle(color);
   };
+
+
 
   return (
     <div className="semaphore-container">
       <div className="semaphore-item">
         <Circle
+          ref={redCircleRef}
           color="red"
           active={activeCircle === "red"}
           onClick={() => handleCircleClick("red")}
