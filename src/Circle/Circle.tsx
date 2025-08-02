@@ -7,31 +7,28 @@ interface Props {
   onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-// export function Circle({ color, active, onClick }: Props) {
-
 export const Circle = forwardRef<HTMLDivElement, Props>(
-  ({ color, active, onClick}, ref) => {
+  ({ color, active, onClick }, ref) => {
+    const colorClass = styles[`circle-${color}`];
+    const activeClass = active ? styles[`circle-${color}--active`] : "";
 
-  const colorClass = styles[`circle-${color}`];
-  const activeClass = active ? styles[`circle-${color}--active`] : "";
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        onClick(event as unknown as React.MouseEvent<HTMLDivElement>);
+      }
+    };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      onClick(event as unknown as React.MouseEvent<HTMLDivElement>);
-    }
-  };
-
-  return (
-    <div
-    ref={ref}
-      tabIndex={0}
-      className={`${styles.circle} ${colorClass} ${activeClass}`}
-      onClick={onClick}
-      onKeyDown={handleKeyDown}
-      role="button"
-      aria-pressed={active}
-    />
-  );
-}
-)
+    return (
+      <div
+        ref={ref}
+        tabIndex={0}
+        className={`${styles.circle} ${colorClass} ${activeClass}`}
+        onClick={onClick}
+        onKeyDown={handleKeyDown}
+        role="button"
+        aria-pressed={active}
+      />
+    );
+  }
+);

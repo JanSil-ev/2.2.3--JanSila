@@ -5,20 +5,17 @@ import { Circle } from "./Circle/Circle";
 function App() {
   const [activeCircle, setActiveCircle] = useState<string>("red");
 
-const redCircleRef = useRef<HTMLDivElement>(null)
+  const redCircleRef = useRef<HTMLDivElement>(null);
 
-useEffect(() => {
-  if(redCircleRef.current) {
-    redCircleRef.current.focus();
-  }
-}, []);
-
+  useEffect(() => {
+    if (redCircleRef.current) {
+      redCircleRef.current.focus();
+    }
+  }, []);
 
   const handleCircleClick = (color: string) => {
     setActiveCircle(color);
   };
-
-
 
   return (
     <div className="semaphore-container">
