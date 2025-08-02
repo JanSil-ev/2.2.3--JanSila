@@ -32,3 +32,5 @@ export const Circle = forwardRef<HTMLDivElement, Props>(
     );
   }
 );
+
+Circle.displayName = "Circle";
